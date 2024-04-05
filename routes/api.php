@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Presentation\Auth\Controller\LoginController;
+use Presentation\Auth\Controller\RegisterController;
+use Presentation\Publication\Controller\CreatePublicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('post')->group(function () {
+        Route::post('create', CreatePublicationController::class)->name('post.create');
+    });
 });
+
+Route::post('login', LoginController::class)->name('login');
+Route::post('register', RegisterController::class)->name('register');

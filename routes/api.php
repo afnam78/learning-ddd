@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Presentation\Auth\Controller\LoginController;
 use Presentation\Auth\Controller\RegisterController;
+use Presentation\Comment\CreateCommentController;
 use Presentation\Publication\Controller\CreatePublicationController;
 use Presentation\Publication\Controller\DeleteAllPublications;
 use Presentation\Publication\Controller\DeleteOwnPublication;
@@ -25,6 +26,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('update/{publication}', UpdatePublicationController::class)->name('post.update');
         Route::delete('delete/{publication}', DeleteOwnPublication::class)->name('post.delete');
         Route::delete('delete', DeleteAllPublications::class)->name('post.delete-all')->middleware('role:admin');
+    });
+
+    Route::prefix('comment')->group(function () {
+        Route::post('create', CreateCommentController::class)->name('comment.create');
     });
 });
 

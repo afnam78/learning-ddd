@@ -1,8 +1,10 @@
 <?php
 
+use Application\Auth\Provider\AuthProvider;
+use Application\Comment\Provider\CommentProvider;
+use Application\Publication\Provider\PublicationProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
-use Infrastructure\Publication\Provider\PublicationServiceProvider;
 
 return [
 
@@ -169,9 +171,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Application\Auth\Provider\AuthServiceProvider::class,
-        Domain\Auth\Provider\AuthRepositoryProvider::class,
-        PublicationServiceProvider::class,
+        AuthProvider::class,
+        PublicationProvider::class,
+        CommentProvider::class,
     ])->toArray(),
 
     /*

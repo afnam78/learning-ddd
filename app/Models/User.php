@@ -69,4 +69,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Publication::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

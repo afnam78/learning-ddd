@@ -13,9 +13,20 @@ interface PublicationRepositoryInterface
     public function create(array $publication): Publication;
 
     /**
-     * @param int $id
-     * @param array $publication
+     * @param Publication $publication
+     * @param array $data
      * @return Publication
      */
-    public function update(int $id, array $publication): Publication;
+    public function update(Publication $publication, array $data): Publication;
+
+    /**
+     * @return void
+     */
+    public function deleteAll(): void;
+
+    /**
+     * @param Publication $publication
+     * @return void
+     */
+    public function delete(Publication $publication): void;
 }

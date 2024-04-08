@@ -13,6 +13,10 @@ class RegisterController extends Controller
 {
     /**
      * Handle the incoming request.
+     *
+     * @param RegisterRequest $request
+     * @param AuthServiceInterface $service
+     * @return JsonResponse
      */
     public function __invoke(RegisterRequest $request, AuthServiceInterface $service): JsonResponse
     {

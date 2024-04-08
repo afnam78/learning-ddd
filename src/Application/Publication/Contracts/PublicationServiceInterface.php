@@ -17,9 +17,22 @@ interface PublicationServiceInterface
     /**
      * Update a publication.
      *
-     * @param int $id
+     * @param Publication $publication
      * @param array $data
      * @return Publication
      */
-    public function update(int $id, array $data): Publication;
+    public function update(Publication $publication, array $data): Publication;
+
+    /**
+     * @return void
+     */
+    public function deleteAll(): void;
+
+    /**
+     * Delete a publication by id.
+     *
+     * @param Publication $publication
+     * @return void
+     */
+    public function delete(Publication $publication): void;
 }

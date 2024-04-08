@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Presentation\Auth\Controller\LoginController;
 use Presentation\Auth\Controller\RegisterController;
 use Presentation\Publication\Controller\CreatePublicationController;
+use Presentation\Publication\Controller\DeleteAllPublications;
+use Presentation\Publication\Controller\DeleteOwnPublication;
+use Presentation\Publication\Controller\UpdatePublicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +22,9 @@ use Presentation\Publication\Controller\CreatePublicationController;
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('post')->group(function () {
         Route::post('create', CreatePublicationController::class)->name('post.create');
+        Route::put('update/{publication}', UpdatePublicationController::class)->name('post.update');
+        Route::delete('delete/{publication}', DeleteOwnPublication::class)->name('post.delete');
+        Route::delete('delete', DeleteAllPublications::class)->name('post.delete-all')->middleware('role:admin');
     });
 });
 

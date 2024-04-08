@@ -14,6 +14,11 @@ class CreatePublicationController extends Controller
      * Handle the incoming request.
      *
      * @param CreatePublicationRequest $request
+     * @param PublicationServiceInterface $service
+     *
+     * @throws UserDisabledToPublish
+     * @throws \Exception
+     *
      * @return JsonResponse
      */
     public function __invoke(CreatePublicationRequest $request, PublicationServiceInterface $service): JsonResponse

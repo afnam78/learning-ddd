@@ -1,10 +1,14 @@
 <?php
 declare(strict_types=1);
+
 namespace Application\Publication\Service;
 
+use App\Exceptions\DeleteOtherUserPostException;
+use App\Exceptions\UserDisabledToEdit;
 use App\Models\Publication;
 use Application\Publication\Contracts\PublicationServiceInterface;
 use Domain\Publication\Contracts\PublicationRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class PublicationService implements PublicationServiceInterface
 {
@@ -25,13 +29,37 @@ class PublicationService implements PublicationServiceInterface
     }
 
     /**
-     * @param int $id
+     * @param Publication $publication
      * @param array $data
+     *
+     * @throws UserDisabledToEdit
      * @return Publication
      */
-    public function update(int $id, array $data): Publication
+    public function update(Publication $publication, array $data): Publication
     {
-        return $this->repository->update($id, $data);
+        if ($publication->user_id !== Auth::id()) throw new UserDisabledToEdit();
+        return $this->repository->update($publication, $data);
     }
 
+    /**
+     * @return void
+     */
+    public function deleteAll(): void
+    {
+        $this->repository->deleteAll();
+    }
+
+    /**
+     * @param Publication $publication
+     *
+     * @throws DeleteOtherUserPostException
+     * @return void
+     */
+    public function delete(Publication $publication): void
+    {
+        if ($publication->user_id !== Auth::id()) {
+            throw new DeleteOtherUserPostException();
+        }
+        $this->repository->delete($publication);
+    }
 }

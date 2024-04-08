@@ -12,6 +12,10 @@ class LoginController extends Controller
 {
     /**
      * Handle the incoming request.
+     *
+     * @param LoginRequest $request
+     * @param AuthServiceInterface $service
+     * @return JsonResponse
      */
     public function __invoke(LoginRequest $request, AuthServiceInterface $service): JsonResponse
     {

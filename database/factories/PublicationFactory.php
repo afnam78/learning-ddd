@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class PublicationFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraph,
+            'user_id' => User::factory()->create()->id,
         ];
     }
 }
